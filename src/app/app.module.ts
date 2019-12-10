@@ -22,7 +22,8 @@ import { OrdersComponent } from './components/admin/orders/orders.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'products', component: ProductsComponent }
+  { path: 'products', component: ProductsComponent },
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({
