@@ -14,6 +14,11 @@ import { ProductsComponent } from './components/products/products.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsModule } from './modules/products/products.module';
+import { AdminComponent } from './components/admin/admin.component';
+import { ItemsComponent } from './components/admin/items/items.component';
+import { CategoriesComponent } from './components/admin/categories/categories.component';
+import { CustomersComponent } from './components/admin/customers/customers.component';
+import { OrdersComponent } from './components/admin/orders/orders.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +30,12 @@ const appRoutes: Routes = [
     AppComponent,
     CustomernavComponent,
     BannersComponent,
-    NavigationComponent
+    NavigationComponent,
+    AdminComponent,
+    ItemsComponent,
+    CategoriesComponent,
+    CustomersComponent,
+    OrdersComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
