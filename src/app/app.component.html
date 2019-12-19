@@ -1,9 +1,14 @@
 <html>
-  <body>
-    <app-navigation></app-navigation>
-    <app-customernav></app-customernav>
-    <app-banners></app-banners>
-    <router-outlet></router-outlet>
+  <body>  
+    <div *ngIf="isAdmin() == false;else admin">
+        <app-user></app-user>
+    </div> 
+    <ng-template #admin>
+      <div>
+          <app-admin></app-admin>
+      </div>
+    </ng-template>
+    
   </body>
 </html>
 
