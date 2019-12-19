@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from 'src/app/components/products/products.component';
+import { ProductsComponent } from 'src/app/components/user/products/products.component';
 
 @NgModule({
   declarations: [ProductsComponent],
