@@ -1,11 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
-// import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-// import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { HomeComponent } from './components/home/home.component';
 import { CustomernavComponent } from './components/user/customernav/customernav.component';
 import { BannersComponent } from './components/user/banners/banners.component';
 import { NavigationComponent } from './components/user/navigation/navigation.component';
@@ -20,6 +17,8 @@ import { CategoriesComponent } from './components/admin/categories/categories.co
 import { CustomersComponent } from './components/admin/customers/customers.component';
 import { OrdersComponent } from './components/admin/orders/orders.component';
 import { UserComponent } from './components/user/user.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+// import { AuthRequestInterceptor } from './interceptors/AuthRequestInterceptor';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,15 +40,17 @@ const appRoutes: Routes = [
     CustomersComponent,
     OrdersComponent,
     UserComponent
+    
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     AppRoutingModule,
     HomeModule,
-    ProductsModule
+    ProductsModule,
+    HttpClientModule
   ],
-  providers: [],
+  // providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthRequestInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

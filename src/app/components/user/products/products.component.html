@@ -1,160 +1,36 @@
 <!-- Card deck -->
 <div class="card-deck">
-  <div class="row">
-    <!-- Card -->
-    <div class="card mb-4">
+  <div *ngFor="let item of list; let i = index">
+    <div class="row" *ngIf="i % 3">
+
+      <!-- Card -->
+      <div class="card mb-4" *ngFor="let elem of list.slice(i,i+3)">
+        
+        <!--Card image-->
+        <div class="view overlay">
+          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
       
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
+        <!--Card content-->
+        <div class="card-body">
     
-      <!--Card content-->
-      <div class="card-body">
-  
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-light-blue btn-md">Read more</button>  
-      </div>
-    
-    </div>
-    <!-- Card End-->
-    
-    <!-- Card -->
-    <div class="card mb-4">
-  
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-  
-      <!--Card content-->
-      <div class="card-body">
-  
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-light-blue btn-md">Read more</button>  
-      </div>
-  
-    </div>
-    <!-- Card End-->
-    
-    <!-- Card -->
-    <div class="card mb-4">
-  
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/15.jpg" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-  
-      <!--Card content-->
-      <div class="card-body">
-  
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-light-blue btn-md">Read more</button>  
-      </div>
-  
-    </div>
-    <!-- Card End-->
-
-  </div>     
-  
-  <div class="row">
-    <!-- Card -->
-    <div class="card mb-4">
+          <!--Title-->
+          <h5 class="card-title"> {{item.name}} </h5>
+          <p><b>Cena:</b> {{item.price}} PLN</p>          
+          <!--Text-->
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+          <button type="button" class="btn btn-light-blue btn-md">Read more</button>  
+        </div>
       
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
       </div>
-    
-      <!--Card content-->
-      <div class="card-body">
-  
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-light-blue btn-md">Read more</button>  
-      </div>
-    
-    </div>
-    <!-- Card End-->
-    
-    <!-- Card -->
-    <div class="card mb-4">
-  
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-  
-      <!--Card content-->
-      <div class="card-body">
-  
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-light-blue btn-md">Read more</button>  
-      </div>
-  
-    </div>
-    <!-- Card End-->
-    
-    <!-- Card -->
-    <div class="card mb-4">
-  
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/15.jpg" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-  
-      <!--Card content-->
-      <div class="card-body">
-  
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-light-blue btn-md">Read more</button>  
-      </div>
-  
-    </div>
-    <!-- Card End-->
+    </div> 
 
-  </div>  
-
+  </div>
+      
+  
 </div>
 <!-- Card deck -->
