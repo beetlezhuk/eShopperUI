@@ -17,7 +17,8 @@ import { CategoriesComponent } from './components/admin/categories/categories.co
 import { CustomersComponent } from './components/admin/customers/customers.component';
 import { OrdersComponent } from './components/admin/orders/orders.component';
 import { UserComponent } from './components/user/user.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminNavigationComponent } from './components/admin/admin-navigation/admin-navigation.component'
 // import { AuthRequestInterceptor } from './interceptors/AuthRequestInterceptor';
 
 const appRoutes: Routes = [
@@ -25,7 +26,9 @@ const appRoutes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'admin', component: ItemsComponent },
   { path: 'admin/items', component: ItemsComponent },
-  { path: 'admin/orders', component: OrdersComponent }
+  { path: 'admin/orders', component: OrdersComponent },
+  { path: 'admin/customers', component: CustomersComponent},
+  { path: 'admin/categories', component: CategoriesComponent}
 ];
 
 @NgModule({
@@ -39,7 +42,8 @@ const appRoutes: Routes = [
     CategoriesComponent,
     CustomersComponent,
     OrdersComponent,
-    UserComponent
+    UserComponent,
+    AdminNavigationComponent
     
   ],
   imports: [
