@@ -1,0 +1,30 @@
+<div>
+
+</div>
+
+<form (ngSubmit)="onSubmitLogin(authForm)" #authForm="ngForm">
+    <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Email</label>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+            </div>
+
+            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" ngModel name="email" required email>
+            
+            <div class="invalid-feedback">
+                Prosze wpisac email.
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <label for="validationCustom02">Password</label>
+        <input type="password" class="form-control" id="validationCustom02" value="" ngModel name="password" required password>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <button type="submit" class="btn btn-dark">Submit</button>
+</form> 
