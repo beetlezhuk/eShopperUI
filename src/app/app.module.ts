@@ -18,8 +18,11 @@ import { CustomersComponent } from './components/admin/customers/customers.compo
 import { OrdersComponent } from './components/admin/orders/orders.component';
 import { UserComponent } from './components/user/user.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AdminNavigationComponent } from './components/admin/admin-navigation/admin-navigation.component'
-// import { AuthRequestInterceptor } from './interceptors/AuthRequestInterceptor';
+import { AdminNavigationComponent } from './components/admin/admin-navigation/admin-navigation.component';
+import { LoginComponent } from './components/common/login/login.component'
+import { AuthRequestInterceptor } from './interceptors/AuthRequestInterceptor';
+import { SignInFailureInterceptor } from './interceptors/SignInFailureInterceptor';
+import { FormsModule, NgForm }   from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,7 +31,8 @@ const appRoutes: Routes = [
   { path: 'admin/items', component: ItemsComponent },
   { path: 'admin/orders', component: OrdersComponent },
   { path: 'admin/customers', component: CustomersComponent},
-  { path: 'admin/categories', component: CategoriesComponent}
+  { path: 'admin/categories', component: CategoriesComponent},
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -43,7 +47,8 @@ const appRoutes: Routes = [
     CustomersComponent,
     OrdersComponent,
     UserComponent,
-    AdminNavigationComponent
+    AdminNavigationComponent,
+    LoginComponent
     
   ],
   imports: [
@@ -52,9 +57,12 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HomeModule,
     ProductsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  // providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthRequestInterceptor, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthRequestInterceptor, multi: true}, 
+    {provide: HTTP_INTERCEPTORS, useClass: SignInFailureInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
