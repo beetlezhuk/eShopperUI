@@ -23,6 +23,8 @@ import { LoginComponent } from './components/common/login/login.component'
 import { AuthRequestInterceptor } from './interceptors/AuthRequestInterceptor';
 import { SignInFailureInterceptor } from './interceptors/SignInFailureInterceptor';
 import { FormsModule, NgForm }   from '@angular/forms';
+import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
+import { AuthGuard } from './services/RouteGuards/AuthGuard';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
   { path: 'admin/orders', component: OrdersComponent },
   { path: 'admin/customers', component: CustomersComponent},
   { path: 'admin/categories', component: CategoriesComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -48,7 +51,8 @@ const appRoutes: Routes = [
     OrdersComponent,
     UserComponent,
     AdminNavigationComponent,
-    LoginComponent
+    LoginComponent,
+    MyProfileComponent
     
   ],
   imports: [

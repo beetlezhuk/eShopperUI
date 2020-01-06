@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/User';``
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { AuthTokenResponse } from 'src/app/models/AuthTokenResponse';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { map } from 'rxjs/operators';
+import { environment } from './../../../environments/environment';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,42 +17,56 @@ export class LoginServiceService {
   private expiresInKey: string = "expiresIn";
   private registeredKey: string = "registered";
   private refreshTokenKey: string = "refreshToken";
-  private encodedJwtKey: string = "encodedJwt";
   jwtDecoderService = new JwtHelperService();
+  redirectUrl: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   performLoginIsSuccessful(loginObject: User) {
     var successful: boolean = false;
 
       this
       .http
-      .post<AuthTokenResponse>("http://localhost:8080/client/sign-in", loginObject)
-      .subscribe(x => { 
-        console.log(x)
+      .post<AuthTokenResponse>(environment.signInApiUrl, loginObject)
+      .pipe(map(e  => {
+        if(this.redirectUrl) {
+          this.router.navigate([this.redirectUrl]);
+        }        
+        return e;
+      }))
+      .subscribe(x => {
         localStorage.setItem(this.idTokenKey, JSON.stringify(x.idToken));
         localStorage.setItem(this.expiresInKey, JSON.stringify(x.expiresIn));
         localStorage.setItem(this.registeredKey, JSON.stringify(x.registered));
         localStorage.setItem(this.refreshTokenKey, JSON.stringify(x.refreshToken));
-        localStorage.setItem(this.encodedJwtKey, JSON.stringify(x));
-        successful = this.isTokenValid();
-      });      
+      });
   }
 
   public isTokenValid(): boolean {
-    // const jwt = localStorage.getItem(this.encodedJwtKey);
     const idToken = localStorage.getItem(this.idTokenKey);
+    var num: Number;
+    
 
-    if(!this.isJwtExpired(idToken)) {
-      this.http.post("http://localhost:8080/client/authenticate", JSON.parse(idToken)).subscribe(x => {console.log(x)});
+    if(idToken != undefined) {
+      if(!this.isUserSessionExpired()) {
+
+        this
+        .http
+        .post(environment.authApiUrl, JSON.parse(idToken), {observe: 'response'})
+        .pipe(
+          map(x => {
+            num = x.status;
+            return x.status;
+          })).subscribe();
+      }
+      return num != 401;
     }
-
-    return true;
   }
 
   public isUserSessionExpired() {
-    const jwt = localStorage.getItem(this.encodedJwtKey);
-    return this.isJwtExpired(jwt);
+    let jwt = localStorage.getItem(this.idTokenKey);
+    let pureJwt: string = jwt.replace("\"", "");
+    return this.isJwtExpired(pureJwt);
   }
 
   private isJwtExpired(jwt: string): boolean {
