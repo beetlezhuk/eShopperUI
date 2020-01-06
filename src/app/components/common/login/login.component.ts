@@ -11,6 +11,7 @@ import { User } from 'src/app/models/User';
 export class LoginComponent implements OnInit {
 
   loginService: LoginServiceService;
+  redirectUrl: string;
 
   constructor(loginService: LoginServiceService) { 
     this.loginService = loginService;
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   onSubmitLogin(form: NgForm) {    
     let user: User = new User(form.value.email, form.value.password);
     this.loginService.performLoginIsSuccessful(user);
+    
     form.reset();
   }
-
 }
