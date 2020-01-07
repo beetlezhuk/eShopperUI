@@ -2,6 +2,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import { LoginServiceService } from '../login/login-service.service';
 import { Injectable } from '@angular/core';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
@@ -9,16 +10,21 @@ export class AuthGuard implements CanActivate {
     constructor(private authService: LoginServiceService, private router: Router) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+        this.authService.redirectUrl = state.url;
+        return this.authService.user.pipe(map(user => {
+            const isAuth = !!user;
 
-        let isValid: boolean = false;
-        isValid = this.authService.isTokenValid();
-        
-        if(isValid) {
-            return true;
-        } else {
-            this.authService.redirectUrl = state.url;
+            if(isAuth) {
+                return true;
+            }
+
             this.router.navigate(['login'])
             return false;
-        }
-    }    
+        }));
+    }  
+    
+    redirectToLogin(): boolean {
+        this.router.navigate(['login']);
+        return false;
+    }
 }
