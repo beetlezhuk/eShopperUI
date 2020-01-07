@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginServiceService } from './services/login/login-service.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  
   title = 'eShopperUI';
   path: String = "";
 
-  constructor(router: Router) {
+  constructor(router: Router, private loginService: LoginServiceService) {
     router.events.subscribe((val) => {
       this.path = router.url;
       console.log(">>>>>>>>>>>>>>>" + this.path)
     })
+  }
+
+  ngOnInit(): void {
+    this.loginService.loadUser();
   }
 
   isAdmin(): boolean {
