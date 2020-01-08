@@ -23,8 +23,8 @@ export class AuthGuard implements CanActivate {
         }));
     }  
     
-    redirectToLogin(): boolean {
-        this.router.navigate(['login']);
-        return false;
-    }
+    // redirectToLogin(): boolean {
+    //     this.router.navigate(['login']);
+    //     return false;
+    // }
 }
