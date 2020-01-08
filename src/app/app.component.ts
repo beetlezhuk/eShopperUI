@@ -12,7 +12,6 @@ export class AppComponent implements OnInit{
   
   title = 'eShopperUI';
   path: String = "";
-  public user: User;
 
   constructor(router: Router, private loginService: LoginServiceService) {
     router.events.subscribe((val) => {
@@ -22,7 +21,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.user = this.loginService.loadUser();
+    this.loginService.loadUser();
   }
 
   isAdmin(): boolean {
