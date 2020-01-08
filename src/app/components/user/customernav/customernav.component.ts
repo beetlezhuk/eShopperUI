@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/User';
+import { LoginServiceService } from 'src/app/services/login/login-service.service';
 
 @Component({
   selector: 'app-customernav',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomernavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService: LoginServiceService) { }
 
   ngOnInit() {
   }

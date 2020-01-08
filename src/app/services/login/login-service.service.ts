@@ -25,6 +25,12 @@ export class LoginServiceService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  logout() {
+    this.user.next(null);
+    localStorage.removeItem("currentUser");
+    this.router.navigate(['/login']);
+  }
+
   performLoginIsSuccessful(loginObject: {email: String, password: String}) {
     var successful: boolean = false;
 
