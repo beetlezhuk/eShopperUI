@@ -25,10 +25,22 @@ import { SignInFailureInterceptor } from './interceptors/SignInFailureIntercepto
 import { FormsModule, NgForm }   from '@angular/forms';
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
 import { AuthGuard } from './services/RouteGuards/AuthGuard';
+import { ProductDetailComponent } from './components/user/products/product-detail/product-detail.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'products', component: ProductsComponent },
+  { path: 'products', component: ProductsComponent, children: [
+    {
+      path: '',
+      component: ProductsComponent,
+      children: [
+        {
+          path: ':id',
+          component: ProductDetailComponent
+        }
+      ]
+    }    
+  ]},
   { path: 'admin', component: ItemsComponent },
   { path: 'admin/items', component: ItemsComponent },
   { path: 'admin/orders', component: OrdersComponent },
