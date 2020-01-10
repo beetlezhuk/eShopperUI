@@ -28,19 +28,9 @@ import { AuthGuard } from './services/RouteGuards/AuthGuard';
 import { ProductDetailComponent } from './components/user/products/product-detail/product-detail.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'products', component: ProductsComponent, children: [
-    {
-      path: '',
-      component: ProductsComponent,
-      children: [
-        {
-          path: ':id',
-          component: ProductDetailComponent
-        }
-      ]
-    }    
-  ]},
+  { path: '', component: HomeComponent, pathMatch: "full" },
+  { path: 'products', component: ProductsComponent },
+  { path: 'products/:id', component: ProductDetailComponent },
   { path: 'admin', component: ItemsComponent },
   { path: 'admin/items', component: ItemsComponent },
   { path: 'admin/orders', component: OrdersComponent },
