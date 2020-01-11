@@ -1,13 +1,16 @@
 <html>
   <body>  
-    <div *ngIf="isAdmin() == false;else admin">
-        <app-user></app-user>
-    </div> 
-    <ng-template #admin>
-      <div>
-          <app-admin></app-admin>
-      </div>
-    </ng-template>
+    <div *ngIf="isAdmin()">
+      <app-admin></app-admin>
+    </div>
+
+    <div *ngIf="isUser()">
+      <app-user></app-user>
+    </div>
+
+    <div *ngIf="isNeutral()">
+      <router-outlet></router-outlet>
+    </div>
     
   </body>
 </html>

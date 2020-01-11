@@ -24,7 +24,15 @@ export class AppComponent implements OnInit{
     this.loginService.loadUser();
   }
 
-  isAdmin(): boolean {
-    return this.path.includes("/admin");
+  isAdmin(): Boolean {
+    return this.path.includes("admin");
+  }
+
+  isUser(): Boolean {
+    return !this.isAdmin() && !this.isNeutral();
+  }
+
+  isNeutral(): boolean {
+    return this.path.includes("login");
   }
 }
