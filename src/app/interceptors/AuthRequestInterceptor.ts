@@ -12,6 +12,7 @@ export class AuthRequestInterceptor implements HttpInterceptor {
         const isProfile: boolean = req.url.includes("profile");
 
         if(isProfile) {
+            console.log("Check");
             this.loginService.isTokenValid()
         }
         

@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         this.authService.redirectUrl = state.url;
+        console.log("SUKA");
         return this.authService.user.pipe(map(user => {
             const isAuth = !!user;
 
