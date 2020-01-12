@@ -1,37 +1,39 @@
-<!-- Card deck -->
-<div class="card-deck">
-  <div *ngFor="let item of list; let i = index">
-    <div class="row" *ngIf="i % 3 == 0">
+<div class="products-list">
+  <!-- Card deck -->
+  <div class="card-deck">
+    <div *ngFor="let item of list; let i = index">
+      <div class="row" *ngIf="i % 3 == 0">
 
-      <!-- Card -->
-      <div class="card mb-4" *ngFor="let elem of list.slice(i,i+3)">
+        <!-- Card -->
+        <div class="card mb-4 shadow p-0 mb-5 bg-white rounded" *ngFor="let elem of list.slice(i,i+3)">
+          
+          <!--Card image-->
+          <div class="view overlay">
+            <img class="card-img-top rounded" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+            <a href="#!">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
         
-        <!--Card image-->
-        <div class="view overlay">
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
+          <!--Card content-->
+          <div class="card-body">
       
-        <!--Card content-->
-        <div class="card-body">
-    
-          <!--Title-->
-          <h5 class="card-title"> {{elem.name}} {{elem.id}}</h5>
-          <p><b>Cena:</b> {{elem.price}} PLN</p>          
-          <!--Text-->
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-          <a [routerLink]="['/products', elem.id]">Szczegoly</a>
-          <!-- <button type="button" class="btn btn-outline-success btn-lg" (click)="window.location.href = '/products/';"{{item.id}}>Szczegoly</button>   -->
+            <!--Title-->
+            <h5 class="card-title"> {{elem.name}} {{elem.id}}</h5>
+            <p><b>Cena:</b> {{elem.price}} PLN</p>          
+            <!--Text-->
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+            <a [routerLink]="['/products', elem.id]">Szczegoly</a>
+            <!-- <button type="button" class="btn btn-outline-success btn-lg" (click)="window.location.href = '/products/';"{{item.id}}>Szczegoly</button>   -->
+          </div>
+        
         </div>
-      
-      </div>
-    </div> 
+      </div> 
 
+    </div>
+        
+    
   </div>
-      
-  
+  <!-- Card deck -->
 </div>
-<!-- Card deck -->
