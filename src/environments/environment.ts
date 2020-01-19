@@ -7,7 +7,8 @@ export const environment = {
   production: false,
   apiUrl: apiBase,
   signInApiUrl: apiBase + '/client/sign-in',
-  authApiUrl: apiBase + '/client/authenticate'
+  authApiUrl: apiBase + '/client/authenticate',
+  productsApiUrl: apiBase + '/products',
 };
 
 /*

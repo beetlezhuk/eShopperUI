@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/services/products/products.service';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-product-detail',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor() { }
+  product: Product;
+
+  constructor(private productService: ProductsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getProductDetails();
+  }
+
+  public getProductDetails() {
+    let id: string = this.route.snapshot.paramMap.get("id");
+    this
+    .productService
+    .getProductDetailsById(id)
+    .subscribe(product => this.product = product);
   }
 
 }

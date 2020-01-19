@@ -1,5 +1,8 @@
 class Product {
-    id: number;
+
+    constructor() {}
+
+    id: string;
     name: string;
     isAvailable: boolean;
     price: number;
