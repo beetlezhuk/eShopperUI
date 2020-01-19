@@ -1,33 +1,25 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-// @Injectable()
 export class ProductsComponent implements OnInit {
 
-  private name: String = "";
-  list: Array<Product> = [];
+  list: Product[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
     this.callForProducts();
   }
 
   callForProducts() {
-    
-    this.http.get<Array<Product>>("http://localhost:8080/products/all")
-    .subscribe(data => this.list = data);
-
-    this.list.forEach(element => {
-      console.log(element.name);  
-    });
-    
-  }
-  
+    this
+    .productsService
+    .getAllProducts()
+    .subscribe(result => this.list = result);    
+  }  
 }
