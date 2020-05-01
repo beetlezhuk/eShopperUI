@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginServiceService } from './services/login/login-service.service';
-import { User } from './models/User';
+// import { User } from './models/User';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loginService.loadUser();
+    // this.loginService.loadUser();
   }
 
   isAdmin(): Boolean {
