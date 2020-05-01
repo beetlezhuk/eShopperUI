@@ -9,6 +9,7 @@ export const environment = {
   signInApiUrl: apiBase + '/client/sign-in',
   authApiUrl: apiBase + '/client/authenticate',
   productsApiUrl: apiBase + '/products',
+  loginUrl: apiBase + '/login'
 };
 
 /*

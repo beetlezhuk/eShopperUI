@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/models/User';``
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { AuthTokenResponse } from 'src/app/models/AuthTokenResponse';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map, tap } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
 import { Router } from '@angular/router';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,78 +11,36 @@ import { Subject, BehaviorSubject } from 'rxjs';
 })
 export class LoginServiceService {
 
-  user = new BehaviorSubject<User>(null);
+  AUTHORIZATION_HEADER_KEY: string = "Authorization";
+  statusCode: number;
 
   private idTokenKey: string = "idToken";
-  private expiresInKey: string = "expiresIn";
-  private registeredKey: string = "registered";
-  private refreshTokenKey: string = "refreshToken";
   jwtDecoderService = new JwtHelperService();
   redirectUrl: string;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   logout() {
-    this.user.next(null);
-    localStorage.removeItem("currentUser");
     this.router.navigate(['/login']);
   }
 
-  performLoginIsSuccessful(loginObject: {email: String, password: String}) {
-    var successful: boolean = false;
-
-      this
-      .http
-      .post<AuthTokenResponse>(environment.signInApiUrl, loginObject)
-      .pipe(
-        tap(result => {
-          const expirationDate = new Date(new Date().getTime() + +result.expiresIn * 1000);
-          const user = new User(result.email, result.localId, result.idToken, expirationDate);
-          this.user.next(user);
-          localStorage.setItem("currentUser", JSON.stringify(user));
-        }),
-        map(e  => {
-        if(this.redirectUrl) {
-          this.router.navigate([this.redirectUrl]);
-        }        
-        return e;
-      }))
-      .subscribe();
+  public login(loginObject: {username: string, password: string}) {
+    let loginRequestObservable = this.performLoginRequest(loginObject);
+    this.storeAuthorizationHeader(loginRequestObservable);
   }
 
-  public isTokenValid(): boolean {
-    var num: Number;
-
-    if(this.userExists()) {
-      this
-        .http
-        .post(environment.authApiUrl, this.loadUser().token, {observe: 'response'})
-        .pipe(
-          map(x => {
-            num = x.status;
-            return x.status;
-          })).subscribe();
-    }
-    
-    return num === 200;
+  private performLoginRequest(loginObject: {username: string, password: string}): Observable<HttpResponse<any>> {
+    return this.http.post(environment.loginUrl, loginObject, { observe: 'response'});    
   }
 
-  userExists(): boolean {
-    return !!this.loadUser();
-  }
-
-  loadUser(): User {
-    let userData: {
-      email: String, 
-      id: String,
-      token: String,
-      tokenExpirationDate: string
-    } = JSON.parse(localStorage.getItem("currentUser"));
-
-    let loadedUser = new User(userData.email, userData.id, userData.token, new Date(userData.tokenExpirationDate));
-    this.user.next(loadedUser);
-
-    return loadedUser;
+  private storeAuthorizationHeader(loginRequest: Observable<HttpResponse<any>>) {
+    loginRequest.subscribe({
+      next: res => {
+        localStorage.setItem(this.AUTHORIZATION_HEADER_KEY, res.headers.get(this.AUTHORIZATION_HEADER_KEY));
+        this.router.navigate([this.redirectUrl]);
+      },
+      error: error => console.log(error)
+    })
   }
 
   public isUserSessionExpired() {
