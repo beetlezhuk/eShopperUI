@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginServiceService } from 'src/app/services/login/login-service.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-profile',
@@ -16,7 +17,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   onMyClick() {
-    this.http.get("http://localhost:8080/my-profile").subscribe();
+    this.http.get(environment.myProfileUrl).subscribe();
   }
 
   onLogout() {
