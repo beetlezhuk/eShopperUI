@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginServiceService {
 
-  AUTHORIZATION_HEADER_KEY: string = "Authorization";
+  AUTHORIZATION_HEADER_KEY: string = environment.authorizationHeaderKey;
   statusCode: number;
 
   private idTokenKey: string = "idToken";
@@ -21,7 +21,8 @@ export class LoginServiceService {
   constructor(private http: HttpClient, private router: Router) {}
 
   logout() {
-    this.router.navigate(['/login']);
+    localStorage.removeItem(this.AUTHORIZATION_HEADER_KEY);
+    this.router.navigate(['/']);
   }
 
   public login(loginObject: {username: string, password: string}) {
