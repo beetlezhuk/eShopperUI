@@ -26,6 +26,8 @@ import { FormsModule, NgForm }   from '@angular/forms';
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
 import { AuthGuard } from './services/RouteGuards/AuthGuard';
 import { ProductDetailComponent } from './components/user/products/product-detail/product-detail.component';
+import { CartComponent } from './components/user/cart/cart.component';
+import { LogoutComponent } from './components/common/logout/logout.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: "full" },
@@ -37,7 +39,9 @@ const appRoutes: Routes = [
   { path: 'admin/customers', component: CustomersComponent},
   { path: 'admin/categories', component: CategoriesComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]}
+  { path: 'logout', component: LogoutComponent},
+  { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -54,7 +58,9 @@ const appRoutes: Routes = [
     UserComponent,
     AdminNavigationComponent,
     LoginComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    CartComponent,
+    LogoutComponent
     
   ],
   imports: [

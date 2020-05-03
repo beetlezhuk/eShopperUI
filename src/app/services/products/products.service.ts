@@ -20,4 +20,8 @@ export class ProductsService {
 
     return this.http.get<Product>(environment.productsApiUrl + "/" + id);
   }
+
+  public getCartItemsForCurrentLogedInUser(): Observable<Product[]> {
+    return this.http.get<Product[]>(environment.cartViewUrl);
+  }
 }

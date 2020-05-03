@@ -11,7 +11,8 @@ export const environment = {
   productsApiUrl: apiBase + '/products',
   loginUrl: apiBase + '/login',
   myProfileUrl: apiBase + '/my-profile',
-  authorizationHeaderKey: 'Authorization'
+  authorizationHeaderKey: 'Authorization',
+  cartViewUrl: apiBase + '/cart/view'
 };
 
 /*
