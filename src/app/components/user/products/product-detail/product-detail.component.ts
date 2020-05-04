@@ -26,4 +26,7 @@ export class ProductDetailComponent implements OnInit {
     .subscribe(product => this.product = product);
   }
 
+  public addItemToCart(sku: string) {
+    this.productService.addItemToCart(sku).subscribe();
+  }
 }
