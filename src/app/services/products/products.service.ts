@@ -24,4 +24,8 @@ export class ProductsService {
   public getCartItemsForCurrentLogedInUser(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.cartViewUrl);
   }
+
+  public addItemToCart(sku: string): Observable<any> {
+    return this.http.post(environment.cartAddUrl + "?sku=" + sku, null);
+  }
 }
